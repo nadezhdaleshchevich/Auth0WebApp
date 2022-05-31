@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
-import { UserAuthService } from '../services/user-auth.service';
+import { AuthService } from '@auth0/auth0-angular';
+
+import { environment as env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,11 +13,26 @@ import { UserAuthService } from '../services/user-auth.service';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(public userAuth: UserAuthService) { }
+  constructor(
+    @Inject(DOCUMENT) public document: Document,
+    public auth: AuthService ,
+    public http: HttpClient   
+  ) { }
 
   ngOnInit(): void {
   }
 
+  login(): void {
+    this.auth.loginWithRedirect();
+  }
+
+  logout(): void {
+    this.auth.logout({ returnTo: document.location.origin });
+  }
+
+  callClaims(): void {
+    this.http.get(`${env.dev.apiUri}/claims/`).subscribe(result => console.log(result));
+  }
 }
 
 

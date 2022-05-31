@@ -1,0 +1,6 @@
+{
+    "domain": "dev-vada8fqr.us.auth0.com",
+    "clientId": "VLHH9EezzHTiMkuVf1DW2sj0FeJ5XbWx",
+    "audience": "http://localhost:3010/api/",
+    "apiUri": "/api"
+}

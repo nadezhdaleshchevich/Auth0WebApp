@@ -7,14 +7,14 @@
     <span>Welcome</span>
       <div class="spacer"></div>
 
-      <ng-container *ngIf="userAuth.isAuthenticated() | async; else loggedOut">
-        <button (click)="userAuth.logout()">
+      <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+        <button (click)="logout()">
           Log out
         </button>
       </ng-container>
   
       <ng-template #loggedOut>
-        <button (click)="userAuth.login()">Log in</button>
+        <button (click)="login()">Log in</button>
       </ng-template>
 
   </div>
